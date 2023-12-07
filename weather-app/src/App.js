@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 
+// src/App.js
+import React, { useState } from 'react';
+import ZipcodeForm from './components/ZipcodeForm'; // Adjust the import path
+
 function App() {
+  const [weatherData, setWeatherData] = useState(null);
+
+  const handleWeatherData = (data) => {
+    setWeatherData(data);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Weather App</h1>
+
+      {weatherData ? (
+        <div>
+          <h2>Weather Data</h2>
+          <pre>{JSON.stringify(weatherData, null, 2)}</pre>
+        </div>
+      ) : (
+        <ZipcodeForm onWeatherData={handleWeatherData} />
+      )}
     </div>
   );
 }
