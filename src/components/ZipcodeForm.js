@@ -9,7 +9,7 @@ const ZipcodeForm = ({ onWeatherData }) => {
 
     try {
       // Make an API call to fetch weather data
-      const response = await fetch(`http://localhost:8080/weather/${zipcode}`);
+      const response = await fetch(`https://x44bmq914m.execute-api.us-east-2.amazonaws.com/prod/npm weather/${zipcode}`);
       const data = await response.json();
 
       // Update the weather data in the parent component
