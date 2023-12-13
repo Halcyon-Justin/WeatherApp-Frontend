@@ -11,7 +11,10 @@ const ZipcodeForm = () => {
 
     try {
       // Make an API call to fetch weather data
-      const response = await fetch(`https://x44bmq914m.execute-api.us-east-2.amazonaws.com/prod/weather/${zipcode}`, {method:'GET', credentials: 'include'});
+      const response = await fetch(`https://x44bmq914m.execute-api.us-east-2.amazonaws.com/prod/weather/${zipcode}`, {
+        method: 'GET',
+        credentials: 'include', // Add this line to include credentials
+      });
       const data = await response.json();
 
       // Update the weather data in the state

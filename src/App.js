@@ -2,7 +2,7 @@
 import './App.css';
 
 import React, { useState } from 'react';
-import ZipcodeForm from './components/ZipCodeForm';
+import ZipcodeForm from './components/ZipcodeForm';
 import WeatherDisplay from './components/WeatherDisplay'; // Adjust the import path
 
 function App() {
