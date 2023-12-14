@@ -43,7 +43,9 @@ const ZipcodeForm = ({ onWeatherData }) => {
       </button>
 
       {/* Display error message if an error occurs */}
+      <div className="m-2">
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div>
     </form>
   );
 };
