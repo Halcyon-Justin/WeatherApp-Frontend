@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-no-undef */
-import './App.css';
-
+// App.js
 import React, { useState } from 'react';
 import ZipcodeForm from './components/ZipCodeForm';
-import WeatherDisplay from './components/WeatherDisplay'; // Adjust the import path
+import WeatherDisplay from './components/WeatherDisplay';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -13,10 +11,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Weather App</h1>
+    <div className="App p-8">
+      <div className="flex justify-center items-center flex-col mb-4">
+        <h1 className="text-3xl font-bold">7-Day Weather Forecast</h1>
+      </div>
+
       {/* Render ZipcodeForm component with onWeatherData prop */}
       <ZipcodeForm onWeatherData={handleWeatherData} />
+
       {weatherData && (
         // Render WeatherDisplay component with weatherData
         <WeatherDisplay weatherData={weatherData} />

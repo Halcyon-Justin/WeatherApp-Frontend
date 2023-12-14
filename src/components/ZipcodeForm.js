@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import WeatherDisplay from './WeatherDisplay';
 
-const ZipcodeForm = () => {
+const ZipcodeForm = ({ onWeatherData }) => {
   const [zipcode, setZipcode] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -11,11 +9,11 @@ const ZipcodeForm = () => {
 
     try {
       // Make an API call to fetch weather data
-      const response = await fetch(`https://x44bmq914m.execute-api.us-east-2.amazonaws.com/prod/weather/${zipcode}`, {method:'GET', credentials: 'include'});
+      const response = await fetch(`https://x44bmq914m.execute-api.us-east-2.amazonaws.com/prod/weather/${zipcode}`, { method: 'GET', credentials: 'include' });
       const data = await response.json();
 
-      // Update the weather data in the state
-      setWeatherData(data);
+      // Update the weather data using the callback
+      onWeatherData(data);
       // Clear any previous errors
       setError(null);
     } catch (error) {
@@ -25,33 +23,28 @@ const ZipcodeForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="bg-gray-100 p-8 rounded shadow-md">
-        {/* Zipcode input */}
-        <label className="block mb-4">
-          Zipcode:
-          <input
-            type="text"
-            value={zipcode}
-            onChange={(e) => setZipcode(e.target.value)}
-            id="zipcode"
-            name="zipcode"
-            className="block w-full mt-2 p-2 border border-gray-300 rounded"
-          />
-        </label>
+    <form onSubmit={handleSubmit} className="flex justify-center items-center p-8">
+      {/* Zipcode input */}
+      <div className="flex items-center space-x-4">
+        <label className="text-xl">Zipcode:</label>
+        <input
+          type="text"
+          value={zipcode}
+          onChange={(e) => setZipcode(e.target.value)}
+          id="zipcode"
+          name="zipcode"
+          className="w-32 p-2 border border-gray-300 rounded" // Added margin-right
+        />
+      </div>
 
-        {/* Submit button */}
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
-          Submit
-        </button>
-      </form>
+      {/* Submit button */}
+      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 ml-2">
+        Submit
+      </button>
 
       {/* Display error message if an error occurs */}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-
-      {/* Display weather data using WeatherApp component */}
-      <WeatherDisplay weatherData={weatherData} />
-    </div>
+    </form>
   );
 };
 
